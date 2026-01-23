@@ -4,7 +4,7 @@
         <div class="col-12 text-center align-self-center py-5">
             <div class="section pb-5 pt-5 pt-sm-2 text-center">
                 <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-                <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+                <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" (click)="resetForms()"/>
                 <label for="reg-log"></label>
                 <div class="card-3d-wrap mx-auto">
                     <div class="card-3d-wrapper">
@@ -15,7 +15,6 @@
                                     <div class="form-group" >
                                         <input type="email" 
                                             formControlName="loginEmail"
-                                            name="loginEmail" 
                                             class="form-style" 
                                             placeholder="Your Email" 
                                             id="logemail" 
@@ -23,12 +22,21 @@
                                             required
                                             email>
                                         <i class="input-icon uil uil-at"></i>
+                                        @if (hasError(loginForm, 'email', 'required')) {
+                                            <small class="error">
+                                            Email is required
+                                            </small>
+                                        }
+                                        @if (hasError(loginForm, 'email', 'email')) {
+                                            <small class="error">
+                                            Invalid email format
+                                            </small>
+                                        }
                                     </div>	
                                     <div class="form-group mt-2">
                                         <input 
                                         type="password" 
                                         formControlName="loginPassword"
-                                        name="loginPassword" 
                                         class="form-style" 
                                         placeholder="Your Password" 
                                         id="logpass" 
@@ -36,6 +44,16 @@
                                         required
                                         minlength="8">
                                         <i class="input-icon uil uil-lock-alt"></i>
+                                        @if (hasError(loginForm, 'password', 'required')) {
+                                            <small class="error">
+                                            Password is required
+                                            </small>
+                                        }
+                                        @if (hasError(loginForm, 'password', 'minlength')) {
+                                            <small class="error">
+                                            Minimum 8 characters
+                                            </small>
+                                        }
                                     </div>
                                     <a href="#" class="btn mt-4">submit</a>
                                     <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
@@ -50,7 +68,6 @@
                                         <input 
                                             type="text" 
                                             formControlName="signupName" 
-                                            name="signupName" 
                                             class="form-style" 
                                             placeholder="Your Full Name" 
                                             id="logname" 
@@ -58,12 +75,21 @@
                                             required
                                             minlength="3">
                                         <i class="input-icon uil uil-user"></i>
+                                        @if (hasError(loginForm, 'name', 'required')) {
+                                            <small class="error">
+                                            Name is required
+                                            </small>
+                                        }
+                                        @if (hasError(loginForm, 'name', 'minlength')) {
+                                            <small class="error">
+                                            Minimum 3 characters
+                                            </small>
+                                        }
                                     </div>	
                                     <div class="form-group mt-2">
                                         <input 
                                             type="email" 
                                             formControlName="signupEmail"
-                                            name="signupEmail" 
                                             class="form-style" 
                                             placeholder="Your Email" 
                                             id="logemail" 
@@ -71,12 +97,21 @@
                                             email
                                             required>
                                         <i class="input-icon uil uil-at"></i>
+                                        @if (hasError(loginForm, 'email', 'required')) {
+                                            <small class="error">
+                                            Email is required
+                                            </small>
+                                        }
+                                        @if (hasError(loginForm, 'email', 'min')) {
+                                            <small class="error">
+                                            Invalid email format
+                                            </small>
+                                        }
                                     </div>	
                                     <div class="form-group mt-2">
                                         <input 
                                             type="password" 
                                             formControlName="signupPassword" 
-                                            name="signupPassword" 
                                             class="form-style" 
                                             placeholder="Your Password" 
                                             id="logpass" 
@@ -84,8 +119,18 @@
                                             required
                                             minlength="8">
                                         <i class="input-icon uil uil-lock-alt"></i>
+                                        @if (hasError(loginForm, 'password', 'required')) {
+                                            <small class="error">
+                                            Password is required
+                                            </small>
+                                        }
+                                        @if (hasError(loginForm, 'password', 'minlength')) {
+                                            <small class="error">
+                                            Minimum 6 characters
+                                            </small>
+                                        }
                                     </div>
-                                    <a href="#" class="btn mt-4">submit</a>
+                                    <button class="btn mt-4">submit</button>
                                 </div>
                             </div>
                         </div>

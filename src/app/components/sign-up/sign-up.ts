@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -8,15 +8,31 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })
-export class SignUp {
-  signupForm = new FormGroup ({
-    signupName: new FormControl('', {nonNullable:true}),
-    signupEmail: new FormControl('', {nonNullable: true}),
-    signupPassword: new FormControl('', {nonNullable: true}),
-  });
-  loginForm = new FormGroup ({
-    loginEmail: new FormControl('', {nonNullable: true}),
-    loginPassword: new FormControl('', {nonNullable: true}),
-  });
+export class SignUp implements OnInit {
+  signupForm!: FormGroup;
+  loginForm!: FormGroup;
 
+  ngOnInit(): void {
+    this.signupForm = new FormGroup ({
+      signupName: new FormControl(''),
+      signupEmail: new FormControl(''),
+      signupPassword: new FormControl(''),
+    });
+    this.loginForm = new FormGroup ({
+      loginEmail: new FormControl(''),
+      loginPassword: new FormControl(''),
+    });
+  }
+
+  resetForms() {
+    this.signupForm.reset();
+    this.loginForm.reset();
+  }
+
+  hasError(form: FormGroup, control: string, error: string): boolean {
+    return undefined != (
+      form.get(control)?.hasError(error) &&
+      form.get(control)?.touched!
+    );
+  }
 }
