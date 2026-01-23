@@ -29,6 +29,13 @@ export class SignUp implements OnInit {
     this.loginForm.reset();
   }
 
+  submitLogin() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+  }
+
   hasError(form: FormGroup, control: string, error: string): boolean {
     return undefined != (
       form.get(control)?.hasError(error) &&
