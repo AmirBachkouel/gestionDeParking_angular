@@ -34,6 +34,8 @@ export class SignUp implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
+
+    alert("Connection établie");
   }
 
   hasError(form: FormGroup, control: string, error: string): boolean {
