@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { UserService } from '../../user-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,6 +13,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class SignUp implements OnInit {
   signupForm!: FormGroup;
   loginForm!: FormGroup;
+
+  constructor (private userService:UserService, private router:Router) {}
 
   ngOnInit(): void {
     this.signupForm = new FormGroup ({
@@ -35,7 +39,18 @@ export class SignUp implements OnInit {
       return;
     }
 
-    alert("Connection établie");
+    this.userService.login(this.loginForm.value).subscribe((res: any) => {
+        if (res) {
+          alert('Login réussi !');
+          this.router.navigate(['home']);
+        } else {
+          alert('Email ou mot de passe incorrect.');
+        }
+      },
+      (err) => {
+        console.error(err);
+        alert('Erreur lors de la connexion.');
+      });
   }
 
   hasError(form: FormGroup, control: string, error: string): boolean {
